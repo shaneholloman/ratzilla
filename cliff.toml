@@ -55,8 +55,12 @@ body = """
 {% endif %}
 
 {%- macro remote_url() -%}
-  https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}
-{%- endmacro -%}
+{%- if remote.owner -%} {# release-plz specific variable #}
+https://github.com/{{ remote.owner }}/{{ remote.repo }}\
+{%- else -%}
+https://github.com/{{ remote.github.owner }}/{{ remote.github.repo }}\
+{%- endif -%}
+{% endmacro %}
 """
 # template for the changelog footer
 footer = """
